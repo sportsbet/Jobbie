@@ -33,6 +33,9 @@ bld/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+# OpenCover
+[Cc]overage.xml
+
 # NUNIT
 *.VisualState.xml
 TestResult.xml
