@@ -10,7 +10,7 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 before_build:
-- msbuild -t:restore .\Src\Jobbie.sln
+- nuget estore .\Src\Jobbie.sln
 build:
   project: .\Src\Jobbie.sln
 after_test:
