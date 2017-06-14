@@ -5,9 +5,19 @@ VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Domain", "Jobbie.Domain\Jobbie.Domain.csproj", "{8AB77DFF-0F91-4967-87F9-461D07CFBFC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Infrastructure", "Jobbie.Infrastructure\Jobbie.Infrastructure.csproj", "{66D9D648-FDFC-4E35-B563-04494767223A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Infrastructure.Autofac", "Jobbie.Infrastructure.Autofac\Jobbie.Infrastructure.Autofac.csproj", "{D7ECF8DD-946F-49ED-8B97-7E63F0AF34A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Executor", "Jobbie.Executor\Jobbie.Executor.csproj", "{83BB7D99-70F7-4F42-A837-364A162FBA3A}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{E054DF85-16D8-4B15-96F4-5604EFC84357}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Domain.Tests.Unit", "Jobbie.Domain.Tests.Unit\Jobbie.Domain.Tests.Unit.csproj", "{8024C293-0D70-44F2-8629-8C9EB5761561}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Executor.Tests.Unit", "Jobbie.Executor.Tests.Unit\Jobbie.Executor.Tests.Unit.csproj", "{BB46EA32-A9C3-4AD9-BB16-CE021E3F5307}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Infrastructure.Tests.Unit", "Jobbie.Infrastructure.Tests.Unit\Jobbie.Infrastructure.Tests.Unit.csproj", "{6AF72D3C-E2D1-4D61-8F10-067320923F47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,15 +29,37 @@ Global
 		{8AB77DFF-0F91-4967-87F9-461D07CFBFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AB77DFF-0F91-4967-87F9-461D07CFBFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AB77DFF-0F91-4967-87F9-461D07CFBFC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66D9D648-FDFC-4E35-B563-04494767223A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66D9D648-FDFC-4E35-B563-04494767223A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66D9D648-FDFC-4E35-B563-04494767223A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66D9D648-FDFC-4E35-B563-04494767223A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7ECF8DD-946F-49ED-8B97-7E63F0AF34A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7ECF8DD-946F-49ED-8B97-7E63F0AF34A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7ECF8DD-946F-49ED-8B97-7E63F0AF34A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7ECF8DD-946F-49ED-8B97-7E63F0AF34A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83BB7D99-70F7-4F42-A837-364A162FBA3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83BB7D99-70F7-4F42-A837-364A162FBA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83BB7D99-70F7-4F42-A837-364A162FBA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83BB7D99-70F7-4F42-A837-364A162FBA3A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8024C293-0D70-44F2-8629-8C9EB5761561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8024C293-0D70-44F2-8629-8C9EB5761561}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8024C293-0D70-44F2-8629-8C9EB5761561}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8024C293-0D70-44F2-8629-8C9EB5761561}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB46EA32-A9C3-4AD9-BB16-CE021E3F5307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB46EA32-A9C3-4AD9-BB16-CE021E3F5307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB46EA32-A9C3-4AD9-BB16-CE021E3F5307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB46EA32-A9C3-4AD9-BB16-CE021E3F5307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF72D3C-E2D1-4D61-8F10-067320923F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF72D3C-E2D1-4D61-8F10-067320923F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF72D3C-E2D1-4D61-8F10-067320923F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF72D3C-E2D1-4D61-8F10-067320923F47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8024C293-0D70-44F2-8629-8C9EB5761561} = {E054DF85-16D8-4B15-96F4-5604EFC84357}
+		{BB46EA32-A9C3-4AD9-BB16-CE021E3F5307} = {E054DF85-16D8-4B15-96F4-5604EFC84357}
+		{6AF72D3C-E2D1-4D61-8F10-067320923F47} = {E054DF85-16D8-4B15-96F4-5604EFC84357}
 	EndGlobalSection
 EndGlobal

@@ -19,9 +19,9 @@ after_test:
 - ps: >-
     . $env:USERPROFILE\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe `
         -register:user `
-        -filter:"+[Jobbie.Domain]*" `
+        -filter:"+[Jobbie.Domain]* +[Jobbie.Infrastructure]* +[Jobbie.Executor]*" `
         -target:"$env:USERPROFILE\.nuget\packages\NUnit.ConsoleRunner\3.6.1\tools\nunit3-console.exe" `
-        -targetargs:".\Src\Jobbie.Domain.Tests.Unit\bin\$env:CONFIGURATION\Jobbie.Domain.Tests.Unit.dll" `
+        -targetargs:".\Src\Jobbie.Domain.Tests.Unit\bin\$env:CONFIGURATION\Jobbie.Domain.Tests.Unit.dll .\Src\Jobbie.Infrastructure.Tests.Unit\bin\$env:CONFIGURATION\Jobbie.Infrastructure.Tests.Unit.dll .\Src\Jobbie.Executor.Tests.Unit\bin\$env:CONFIGURATION\Jobbie.Executor.Tests.Unit.dll" `
         -output:Coverage.xml
 
     . $env:USERPROFILE\.nuget\packages\coveralls.io\1.3.4\tools\coveralls.net.exe `
