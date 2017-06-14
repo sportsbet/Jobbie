@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0"
+     xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <FluentMigratorTools Include="..\packages\FluentMigrator.*\tools\*">
+      <TargetPath>FluentMigratorTools\%(Filename)%(Extension)</TargetPath>
+    </FluentMigratorTools>
+  </ItemGroup>
+
+  <Target Name="CopyFluentMigratorTools"
+          AfterTargets="Build">
+    <message text="Copying FluentMigratorTools into '$(OutDir)'"
+             importance="high" />
+
+    <Copy SourceFiles="@(FluentMigratorTools)"
+          DestinationFiles="@(FluentMigratorTools -> '$(OutDir)%(TargetPath)')"
+          OverwriteReadOnlyFiles="true"
+          Retries="10"
+          RetryDelayMilliseconds="50" />
+
+    <Copy SourceFiles="@(Content)"
+          DestinationFiles="@(Content -> '$(OutDir)%(RelativeDir)%(Filename)%(Extension)') "
+          OverwriteReadOnlyFiles="true"
+          Retries="10"
+          RetryDelayMilliseconds="50" />
+
+    <Copy SourceFiles="@(None)"
+          DestinationFiles="@(None -> '$(OutDir)%(RelativeDir)%(Filename)%(Extension)') "
+          OverwriteReadOnlyFiles="true"
+          Retries="10"
+          RetryDelayMilliseconds="50" />
+  </Target>
+</Project>
