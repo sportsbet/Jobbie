@@ -288,3 +288,7 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+# Angular2
+**/wwwroot/dist/main-client.*
+**/ClientApp/dist/main-server.*
