@@ -5,6 +5,6 @@
         public string Description { get; set; }
         public string Cron { get; set; }
 
-        public override string ToString() => $"Description={Description}";
+        public override string ToString() => $"Description={Description}|Cron={Cron}";
     }
 }
