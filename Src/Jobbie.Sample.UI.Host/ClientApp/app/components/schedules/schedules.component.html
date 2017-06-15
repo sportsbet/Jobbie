@@ -1,0 +1,130 @@
+<div class="page-header">
+    <h1>Schedules <small *ngIf="filterByJob">for job <strong>{{filterByJob.description}}</strong></small></h1>
+    <div class="row" *ngIf="!filterByJob">
+        <div class="col-sm-3">
+            <div class="input-group">
+                <span class="input-group-addon" id="search-terms">Search</span>
+                <input #searchBox type="text" class="form-control" placeholder="Search terms..." aria-describedby="search-terms"(keyup)="searchSchedules(searchBox.value)">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="alert alert-success alert-dismissible col-md-8" role="alert" *ngIf="success">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="success=null"><span aria-hidden="true">&times;</span></button>
+        {{success}}
+    </div>
+ 
+    <div class="alert alert-danger alert-dismissible col-md-8" role="alert" *ngIf="errors.length > 0">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="resetErrors()"><span aria-hidden="true">&times;</span></button>
+        <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+        </ul>
+    </div>
+</div>
+
+<p *ngIf="searching"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> <em>Loading...</em></p>
+
+<div class="row">
+    <div class="col-md-8 panel">
+        <table class="table table-hover" *ngIf="!searching">
+            <thead>
+                <tr title="Sort">
+                    <th (click)="sortSchedules('scheduleId')" role="button">Schedule ID</th>
+                    <th (click)="sortSchedules('description')" role="button">Description</th>
+                    <th (click)="sortSchedules('createdUtc')" role="button">Created</th>
+                    <th (click)="sortSchedules('startUtc')" role="button">Started</th>
+                    <th (click)="sortSchedules('nextUtc')" role="button">Next</th>
+                    <th (click)="sortSchedules('previousUtc')" role="button">Previous</th>
+                    <th (click)="sortSchedules('endUtc')" role="button">End</th>
+                    <th (click)="sortSchedules('cron')" role="button">Cron</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let schedule of schedules" [ngClass]="{'active': schedule.scheduleId == selectedScheduleId}" role="button">
+                    <td (click)="showJob(schedule)">{{schedule.scheduleId}}</td>
+                    <td (click)="showJob(schedule)">{{schedule.description}}</td>
+                    <td (click)="showJob(schedule)">{{schedule.createdUtc + 'Z' | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td (click)="showJob(schedule)">{{schedule.startUtc + 'Z' | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td (click)="showJob(schedule)">{{(schedule.nextUtc ? schedule.nextUtc + 'Z' : null) | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td (click)="showJob(schedule)">{{(schedule.previousUtc ? schedule.previousUtc + 'Z' : null) | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td (click)="showJob(schedule)">{{(schedule.endUtc ? schedule.endUtc + 'Z' : null) | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td (click)="showJob(schedule)">{{schedule.cron}}</td>
+                    <td (click)="showJob(schedule)">
+                        <button type="button" class="btn btn-danger btn-xs" (click)="deleteSchedule(schedule)" title="delete">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="page.totalItemsCount == 0">
+                    <td colspan="9">No schedules found.</td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="page.knownPagesAvailable > 1">
+                <tr>
+                    <td colspan="9">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li *ngIf="page.pageIndex > 0" (click)="fetchSchedules(page.pageIndex - 1)">
+                                    <a href="javascript:void(0)" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li *ngFor="let index of range(page.knownPagesAvailable)" (click)="fetchSchedules(index)" [ngClass]="{'active': index == page.pageIndex}">
+                                    <a href="javascript:void(0)">{{index + 1}}</a>
+                                </li>
+                                <li *ngIf="page.pageIndex < page.knownPagesAvailable - 1" (click)="fetchSchedules(page.pageIndex + 1)">
+                                    <a href="javascript:void(0)" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="col-md-4 panel" *ngIf="selectedJob">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2">Job Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Job ID</td>
+                    <td>{{selectedJob.jobId}}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>{{selectedJob.description}}</td>
+                </tr>
+                <tr>
+                    <td>Created</td>
+                    <td>{{selectedJob.createdUtc + 'Z' | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                </tr>
+                <tr>
+                    <td>Callback URL</td>
+                    <td>{{selectedJob.callbackUrl}}</td>
+                </tr>
+                <tr>
+                    <td>HTTP Verb</td>
+                    <td>{{selectedJob.httpVerb}}</td>
+                </tr>
+                <tr>
+                    <td>Payload</td>
+                    <td>{{selectedJob.payload}}</td>
+                </tr>
+                <tr>
+                    <td>Content Type</td>
+                    <td>{{selectedJob.contentType}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
