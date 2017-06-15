@@ -13,9 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Infrastructure.Autof
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Scheduler.Autofac", "Jobbie.Scheduler.Autofac\Jobbie.Scheduler.Autofac.csproj", "{7303DB27-FF4B-4374-9299-AD48CAFEEAB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Sample.Client.WebApi.Host", "Jobbie.Sample.Client.WebApi.Host\Jobbie.Sample.Client.WebApi.Host.csproj", "{66DBC5DD-495D-48C4-B0EF-A8E91D63576B}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Executor", "Jobbie.Executor\Jobbie.Executor.csproj", "{83BB7D99-70F7-4F42-A837-364A162FBA3A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Sample.Executor.Host", "Jobbie.Sample.Executor.Host\Jobbie.Sample.Executor.Host.csproj", "{AE6384B1-7458-4E16-AB88-6F6AB6F90CAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Sample.Scheduler.Host", "Jobbie.Sample.Scheduler.Host\Jobbie.Sample.Scheduler.Host.csproj", "{517CBA9D-9D66-48D7-A0DE-67A2AAA9804E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Sample.Scheduler.Contracts", "Jobbie.Sample.Scheduler.Contracts\Jobbie.Sample.Scheduler.Contracts.csproj", "{98934F8C-C601-40E9-9F2B-F84A8621A748}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Infrastructure.DatabaseMigrations", "Jobbie.Infrastructure.DatabaseMigrations\Jobbie.Infrastructure.DatabaseMigrations.csproj", "{256E090D-8386-4DCB-BAEF-2F95A460B059}"
 EndProject
@@ -55,6 +61,10 @@ Global
 		{7303DB27-FF4B-4374-9299-AD48CAFEEAB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7303DB27-FF4B-4374-9299-AD48CAFEEAB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7303DB27-FF4B-4374-9299-AD48CAFEEAB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66DBC5DD-495D-48C4-B0EF-A8E91D63576B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66DBC5DD-495D-48C4-B0EF-A8E91D63576B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66DBC5DD-495D-48C4-B0EF-A8E91D63576B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66DBC5DD-495D-48C4-B0EF-A8E91D63576B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83BB7D99-70F7-4F42-A837-364A162FBA3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83BB7D99-70F7-4F42-A837-364A162FBA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83BB7D99-70F7-4F42-A837-364A162FBA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +73,14 @@ Global
 		{AE6384B1-7458-4E16-AB88-6F6AB6F90CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE6384B1-7458-4E16-AB88-6F6AB6F90CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE6384B1-7458-4E16-AB88-6F6AB6F90CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{517CBA9D-9D66-48D7-A0DE-67A2AAA9804E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{517CBA9D-9D66-48D7-A0DE-67A2AAA9804E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{517CBA9D-9D66-48D7-A0DE-67A2AAA9804E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{517CBA9D-9D66-48D7-A0DE-67A2AAA9804E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98934F8C-C601-40E9-9F2B-F84A8621A748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98934F8C-C601-40E9-9F2B-F84A8621A748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98934F8C-C601-40E9-9F2B-F84A8621A748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98934F8C-C601-40E9-9F2B-F84A8621A748}.Release|Any CPU.Build.0 = Release|Any CPU
 		{256E090D-8386-4DCB-BAEF-2F95A460B059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{256E090D-8386-4DCB-BAEF-2F95A460B059}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{256E090D-8386-4DCB-BAEF-2F95A460B059}.Release|Any CPU.ActiveCfg = Release|Any CPU
