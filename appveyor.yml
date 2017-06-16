@@ -15,6 +15,18 @@ before_build:
 - nuget restore .\Src\Jobbie.sln
 build:
   project: .\Src\Jobbie.sln
+after_build:
+- ps: >-
+    if ($env:APPVEYOR_REPO_BRANCH -ne "master") {
+       Update-AppveyorBuild -Version "${env:APPVEYOR_BUILD_VERSION}-alpha"
+    }
+
+    nuget pack .\Src\Jobbie.Infrastructure\Jobbie.Infrastructure.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Infrastructure.Autofac\Jobbie.Infrastructure.Autofac.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Executor\Jobbie.Executor.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Scheduler\Jobbie.Scheduler.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Scheduler.Autofac\Jobbie.Scheduler.Autofac.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Infrastructure.DatabaseMigrations\Jobbie.Infrastructure.DatabaseMigrations.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
 after_test:
 - ps: >-
     . $env:USERPROFILE\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe `
@@ -28,3 +40,5 @@ after_test:
         --opencover Coverage.xml `
         --repo-token vWxX8vfvSkE2iMrfNVUmcnP4NPDnvtBES
 deploy: off
+artifacts:
+- path: .\*.nupkg

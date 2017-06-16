@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Jobbie.Executor</id>
+    <version>$version$</version>
+    <authors>Sportsbet</authors>
+    <owners>Sportsbet</owners>
+    <licenseUrl>https://github.com/sportsbet/Jobbie/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sportsbet/Jobbie</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>A generic distributed scheduler built on Quartz.NET</summary>
+    <description>Provides the ability to execute job schedules.</description>
+    <copyright>Copyright 2017</copyright>
+    <tags>Quartz.NET Quartz Scheduler Distributed DotNet ASP.NET Sportsbet</tags>
+    <dependencies>
+        <dependency id="Jobbie.Infrastructure" version="$version$" />
+    </dependencies>
+  </metadata>
+</package>
