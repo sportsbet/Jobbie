@@ -21,21 +21,21 @@ after_build:
        Update-AppveyorBuild -Version "${env:APPVEYOR_BUILD_VERSION}-alpha"
     }
 
-    nuget restore .\Src\Jobbie.sln
+    .\BuildSolution.ps1
 
     Write-Host "Creating NuGet Package Version: $env:APPVEYOR_BUILD_VERSION"
 
-    nuget pack .\Src\Jobbie.Infrastructure\Jobbie.Infrastructure.csproj -Build -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Infrastructure\Jobbie.Infrastructure.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
 
-    nuget pack .\Src\Jobbie.Infrastructure.Autofac\Jobbie.Infrastructure.Autofac.csproj -Build -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Infrastructure.Autofac\Jobbie.Infrastructure.Autofac.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
 
-    nuget pack .\Src\Jobbie.Executor\Jobbie.Executor.csproj -Build -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Executor\Jobbie.Executor.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
 
-    nuget pack .\Src\Jobbie.Scheduler\Jobbie.Scheduler.csproj -Build -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Scheduler\Jobbie.Scheduler.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
 
-    nuget pack .\Src\Jobbie.Scheduler.Autofac\Jobbie.Scheduler.Autofac.csproj -Build -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Scheduler.Autofac\Jobbie.Scheduler.Autofac.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
 
-    nuget pack .\Src\Jobbie.Infrastructure.DatabaseMigrations\Jobbie.Infrastructure.DatabaseMigrations.csproj -Build -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
+    nuget pack .\Src\Jobbie.Infrastructure.DatabaseMigrations\Jobbie.Infrastructure.DatabaseMigrations.csproj -IncludeReferencedProjects -NoPackageAnalysis -Version $env:APPVEYOR_BUILD_VERSION
 after_test:
 - ps: >-
     . $env:USERPROFILE\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe `
