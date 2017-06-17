@@ -5,6 +5,11 @@ pull_requests:
 skip_tags: true
 configuration: Release
 platform: Any CPU
+init:
+- ps: >-
+    if ($env:APPVEYOR_REPO_BRANCH -ne "master") {
+       Update-AppveyorBuild -Version "${env:APPVEYOR_BUILD_VERSION}-alpha"
+    }
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
@@ -12,12 +17,7 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 before_build:
-- ps: >-
-    if ($env:APPVEYOR_REPO_BRANCH -ne "master") {
-       Update-AppveyorBuild -Version "${env:APPVEYOR_BUILD_VERSION}-alpha"
-    }
-
-    . nuget restore .\Src\Jobbie.sln
+- nuget restore .\Src\Jobbie.sln
 build:
   project: .\Src\Jobbie.sln
   publish_nuget: true
