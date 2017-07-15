@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 import { environment } from '../environment/environment';
 import { DatePipe } from '@angular/common';
+import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -35,7 +36,7 @@ export class JobsComponent {
     private apiUrl = environment.apiUrl;
     private apiVersion = environment.apiVersion;
 
-    constructor(private http: Http, private router: Router, public fb: FormBuilder, title: Title, datePipe: DatePipe) {
+    constructor(private http: AuthHttp, private router: Router, public fb: FormBuilder, title: Title, datePipe: DatePipe) {
         title.setTitle("Jobs - Jobbie Sample Admin UI");
         this.sort = new Sort();
         this.errors = [];

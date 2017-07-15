@@ -12,7 +12,11 @@ namespace Jobbie.Sample.Scheduler.Host.Infrastructure.IoC
                 .AsSelf();
 
             builder
-                .RegisterType<HostConfiguration>()
+                .RegisterType<PublicHostConfiguration>()
+                .AsImplementedInterfaces();
+
+            builder
+                .RegisterType<InternalHostConfiguration>()
                 .AsImplementedInterfaces();
         }
     }

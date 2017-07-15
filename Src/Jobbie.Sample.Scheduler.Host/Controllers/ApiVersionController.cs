@@ -7,6 +7,7 @@ using Jobbie.Sample.Scheduler.Host.Infrastructure.WebApi;
 
 namespace Jobbie.Sample.Scheduler.Host.Controllers
 {
+    [AllowAnonymous]
     public sealed class ApiVersionController : ApiController
     {
         private readonly ISupportedApiVersions _supported;

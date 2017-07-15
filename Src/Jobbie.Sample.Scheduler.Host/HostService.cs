@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
 using Jobbie.Sample.Scheduler.Host.Infrastructure.WebApi.Hosting;
 using Microsoft.Owin.Hosting;
@@ -11,23 +13,28 @@ namespace Jobbie.Sample.Scheduler.Host
         private readonly IScheduler _scheduler;
         private static readonly ILog _log = LogManager.GetLogger<HostService>();
 
-        private readonly string _url;
+        private readonly IEnumerable<string> _urls;
         private IDisposable _host;
 
         public HostService(
-            IHostConfiguration config,
+            IEnumerable<IHostConfiguration> hosts,
             IScheduler scheduler)
         {
             _scheduler = scheduler;
-            _url = config.Url;
+            _urls = hosts.Select(c => c.Url);
         }
 
         public void Start()
         {
             try
             {
-                _log.Info($"Starting WebApi host on {_url}.");
-                _host = WebApp.Start<OwinConfiguration>(_url);
+                var options = new StartOptions();
+                foreach (var url in _urls)
+                {
+                    _log.Info($"Starting WebApi host on {url}.");
+                    options.Urls.Add(url);
+                }
+                _host = WebApp.Start<OwinConfiguration>(options);
             }
             catch (Exception e)
             {

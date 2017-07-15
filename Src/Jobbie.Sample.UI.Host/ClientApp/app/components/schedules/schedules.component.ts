@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../environment/environment';
 import { Subject } from 'rxjs/Subject';
+import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -28,7 +28,7 @@ export class SchedulesComponent {
     private apiUrl: string = environment.apiUrl;
     private apiVersion: string = environment.apiVersion;
 
-    constructor(private http: Http, private route: ActivatedRoute, title: Title) {
+    constructor(private http: AuthHttp, private route: ActivatedRoute, title: Title) {
         title.setTitle("Schedules - Jobbie Sample Admin UI");
         this.sort = new Sort();
         this.errors = [];
