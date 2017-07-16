@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace Jobbie.Scheduler.Tests.Integration
 {
-    [TestFixture]
+    [TestFixture, Explicit]
     public sealed class SchedulerIntegrationTests
     {
         private TestContext _context;
