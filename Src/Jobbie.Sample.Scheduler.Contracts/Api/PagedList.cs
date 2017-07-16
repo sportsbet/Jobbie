@@ -9,12 +9,12 @@ namespace Jobbie.Sample.Scheduler.Contracts.Api
     public class PagedList<T> : SimpleListRepresentation<T>
         where T : IResource
     {
-        public int PageIndex { get; }
-        public int PageSize { get; }
-        public int KnownPagesAvailable { get; }
-        public int TotalItemsCount { get; }
-        public SortDirection SortDirection { get; }
-        public string SortProperty { get; }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
+        public int KnownPagesAvailable { get; set; }
+        public int TotalItemsCount { get; set; }
+        public SortDirection SortDirection { get; set; }
+        public string SortProperty { get; set; }
 
         public sealed override string Rel { get; set; }
 
@@ -61,6 +61,11 @@ namespace Jobbie.Sample.Scheduler.Contracts.Api
                 inner.SortProperty)
         {
 
+        }
+
+        public PagedList()
+        {
+            
         }
     }
 }

@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Sample.Scheduler.Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Infrastructure.DatabaseMigrations", "Jobbie.Infrastructure.DatabaseMigrations\Jobbie.Infrastructure.DatabaseMigrations.csproj", "{256E090D-8386-4DCB-BAEF-2F95A460B059}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{E054DF85-16D8-4B15-96F4-5604EFC84357}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E054DF85-16D8-4B15-96F4-5604EFC84357}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Domain.Tests.Unit", "Jobbie.Domain.Tests.Unit\Jobbie.Domain.Tests.Unit.csproj", "{8024C293-0D70-44F2-8629-8C9EB5761561}"
 EndProject
@@ -36,6 +36,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Infrastructure.Tests.Unit", "Jobbie.Infrastructure.Tests.Unit\Jobbie.Infrastructure.Tests.Unit.csproj", "{6AF72D3C-E2D1-4D61-8F10-067320923F47}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobbie.Sample.UI.Host", "Jobbie.Sample.UI.Host\Jobbie.Sample.UI.Host.csproj", "{45CD9F8F-555F-44F5-BA62-51B8929EBBDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Scheduler.Tests.Integration", "Jobbie.Scheduler.Tests.Integration\Jobbie.Scheduler.Tests.Integration.csproj", "{2FB7D4D9-703E-4D28-B41E-FE755C5486B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,10 @@ Global
 		{45CD9F8F-555F-44F5-BA62-51B8929EBBDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45CD9F8F-555F-44F5-BA62-51B8929EBBDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45CD9F8F-555F-44F5-BA62-51B8929EBBDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB7D4D9-703E-4D28-B41E-FE755C5486B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB7D4D9-703E-4D28-B41E-FE755C5486B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB7D4D9-703E-4D28-B41E-FE755C5486B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB7D4D9-703E-4D28-B41E-FE755C5486B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,5 +122,6 @@ Global
 		{BB46EA32-A9C3-4AD9-BB16-CE021E3F5307} = {E054DF85-16D8-4B15-96F4-5604EFC84357}
 		{BD47628D-0BAB-4402-8655-C286218309C8} = {E054DF85-16D8-4B15-96F4-5604EFC84357}
 		{6AF72D3C-E2D1-4D61-8F10-067320923F47} = {E054DF85-16D8-4B15-96F4-5604EFC84357}
+		{2FB7D4D9-703E-4D28-B41E-FE755C5486B4} = {E054DF85-16D8-4B15-96F4-5604EFC84357}
 	EndGlobalSection
 EndGlobal
