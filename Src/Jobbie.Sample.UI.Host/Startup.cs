@@ -9,14 +9,16 @@ namespace Jobbie.Sample.UI.Host
 {
     public sealed class Startup
     {
-        public Startup(IHostingEnvironment env) =>
+        public Startup(IHostingEnvironment env)
+        {
             Configuration =
                 new ConfigurationBuilder()
                     .SetBasePath(env.ContentRootPath)
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                    .AddJsonFile("appsettings.json", true, true)
+                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                     .AddEnvironmentVariables()
                     .Build();
+        }
 
         public IConfigurationRoot Configuration { get; }
 
@@ -27,25 +29,25 @@ namespace Jobbie.Sample.UI.Host
             log.AddConsole(Configuration.GetSection("Logging"));
             log.AddDebug();
 
+#if DEBUG
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions { HotModuleReplacement = true });
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {HotModuleReplacement = true});
             }
-            else
-                app.UseExceptionHandler("/Home/Error");
+#endif
 
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                    "spa-fallback",
+                    new {controller = "Home", action = "Index"});
             });
         }
     }

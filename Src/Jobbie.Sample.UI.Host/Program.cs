@@ -5,13 +5,13 @@ namespace Jobbie.Sample.UI.Host
 {
     internal sealed class Program
     {
-        private static void Main() =>
+        public static void Main() =>
             new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseUrls("http://*:31902")
+                .UseIISIntegration()
                 .Build()
                 .Run();
     }

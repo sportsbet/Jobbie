@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Scheduler", "Jobbie.Scheduler\Jobbie.Scheduler.csproj", "{E389C604-63E4-43EE-81AD-12859622C1B8}"
 EndProject
@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Scheduler.Tests.Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Infrastructure.Tests.Unit", "Jobbie.Infrastructure.Tests.Unit\Jobbie.Infrastructure.Tests.Unit.csproj", "{6AF72D3C-E2D1-4D61-8F10-067320923F47}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobbie.Sample.UI.Host", "Jobbie.Sample.UI.Host\Jobbie.Sample.UI.Host.csproj", "{45CD9F8F-555F-44F5-BA62-51B8929EBBDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobbie.Sample.UI.Host", "Jobbie.Sample.UI.Host\Jobbie.Sample.UI.Host.xproj", "{45CD9F8F-555F-44F5-BA62-51B8929EBBDF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobbie.Scheduler.Tests.Integration", "Jobbie.Scheduler.Tests.Integration\Jobbie.Scheduler.Tests.Integration.csproj", "{2FB7D4D9-703E-4D28-B41E-FE755C5486B4}"
 EndProject
