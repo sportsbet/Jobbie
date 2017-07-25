@@ -8,7 +8,7 @@ using Quartz;
 
 namespace Jobbie.Scheduler.Commands
 {
-    internal sealed class JobCreator : IJobCreator
+    public sealed class JobCreator : IJobCreator
     {
         private static readonly ILog _log = LogManager.GetLogger<JobCreator>();
 

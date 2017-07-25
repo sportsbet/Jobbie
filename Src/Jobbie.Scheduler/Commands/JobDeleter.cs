@@ -6,7 +6,7 @@ using Quartz;
 
 namespace Jobbie.Scheduler.Commands
 {
-    internal sealed class JobDeleter : IJobDeleter
+    public sealed class JobDeleter : IJobDeleter
     {
         private static readonly ILog _log = LogManager.GetLogger<JobDeleter>();
 
