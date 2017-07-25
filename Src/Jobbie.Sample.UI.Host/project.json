@@ -55,7 +55,7 @@
   },
 
   "scripts": {
-    "prepublish": [ "npm install", "npm run rebuild-sass", "npm run build", "webpack --env.prod" ],
+    "prepublish": [ "npm install", "webpack --env.prod" ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
 }
