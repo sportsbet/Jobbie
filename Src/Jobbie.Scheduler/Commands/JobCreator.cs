@@ -32,7 +32,7 @@ namespace Jobbie.Scheduler.Commands
             string contentType,
             string headers)
         {
-            _log.Debug($"Creating job (JobId={jobId}|Description={description}).");
+            _log.Info($"[JobId={jobId}] [MessageText=Creating job (Description={description}).]");
 
             try
             {

@@ -20,7 +20,7 @@ namespace Jobbie.Scheduler.Commands
 
         public void Delete(Guid jobId)
         {
-            _log.Debug($"Deleting job (JobId={jobId}).");
+            _log.Info($"[JobId={jobId}] [MessageText=Deleting job.]");
 
             try
             {

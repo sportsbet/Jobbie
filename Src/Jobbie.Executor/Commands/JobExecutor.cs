@@ -33,7 +33,7 @@ namespace Jobbie.Executor.Commands
         {
             var raw = context.JobDetail;
             var trigger = context.Trigger;
-            _log.Info($"Executing job ({raw.Key}|{raw.Description}) on schedule ({trigger.Key}|{trigger.Description}).");
+            _log.Info($"[JobId={raw.Key}] [ScheduleId={trigger.Key}] [MessageText=Started executing job ({raw.Description}) on schedule ({trigger.Description}).]");
             _timer.Start();
             
             try
@@ -64,12 +64,12 @@ namespace Jobbie.Executor.Commands
                 throw failure;
             }
 
-            _log.Info($"Finished executing job ({raw.Key}|{raw.Description}) on schedule ({trigger.Key}|{trigger.Description}). TimeTaken={_timer.Elapsed}.");
+            _log.Info($"[JobId={raw.Key}] [ScheduleId={trigger.Key}] [TimeTaken={_timer.Elapsed}] [MessageText=Finished executing job ({raw.Description}) on schedule ({trigger.Description}).]");
         }
 
         private void Post(Job job)
         {
-            _log.Debug($"Sending HTTP POST request to {job.CallbackUrl}.");
+            _log.Debug($"[JobId={job.JobId}] [MessageText=Sending HTTP POST request to {job.CallbackUrl}.]");
             var content = new StringContent(job.Payload, Encoding.UTF8, job.ContentType);
             var request = _client.PostAsync(job.CallbackUrl, content).Result;
             request.EnsureSuccessStatusCode();
@@ -77,7 +77,7 @@ namespace Jobbie.Executor.Commands
 
         private void Put(Job job)
         {
-            _log.Debug($"Sending HTTP PUT request to {job.CallbackUrl}.");
+            _log.Debug($"[JobId={job.JobId}] [MessageText=Sending HTTP PUT request to {job.CallbackUrl}.]");
             var content = new StringContent(job.Payload, Encoding.UTF8, job.ContentType);
             var request = _client.PutAsync(job.CallbackUrl, content).Result;
             request.EnsureSuccessStatusCode();
@@ -85,7 +85,7 @@ namespace Jobbie.Executor.Commands
 
         private void Delete(Job job)
         {
-            _log.Debug($"Sending HTTP DELETE request to {job.CallbackUrl}.");
+            _log.Debug($"[JobId={job.JobId}] [MessageText=Sending HTTP DELETE request to {job.CallbackUrl}.]");
             var request = _client.DeleteAsync(job.CallbackUrl).Result;
             request.EnsureSuccessStatusCode();
         }
