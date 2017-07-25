@@ -10,7 +10,7 @@ using Quartz.Impl.Matchers;
 
 namespace Jobbie.Scheduler.Queries
 {
-    internal sealed class JobReader : IJobReader
+    public sealed class JobReader : IJobReader
     {
         private readonly IScheduler _scheduler;
         private readonly IJobConverter _converter;

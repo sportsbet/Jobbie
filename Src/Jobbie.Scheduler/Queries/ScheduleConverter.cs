@@ -4,7 +4,7 @@ using Quartz;
 
 namespace Jobbie.Scheduler.Queries
 {
-    internal sealed class ScheduleConverter : IScheduleConverter
+    public sealed class ScheduleConverter : IScheduleConverter
     {
         public Schedule For(ITrigger trigger)
         {

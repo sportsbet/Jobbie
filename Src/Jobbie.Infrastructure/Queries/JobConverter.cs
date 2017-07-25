@@ -4,7 +4,7 @@ using Quartz;
 
 namespace Jobbie.Infrastructure.Queries
 {
-    internal sealed class JobConverter : IJobConverter
+    public sealed class JobConverter : IJobConverter
     {
         public Job For(IJobDetail job) =>
             new Job(

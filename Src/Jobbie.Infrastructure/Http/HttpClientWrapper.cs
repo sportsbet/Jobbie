@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Jobbie.Infrastructure.Http
 {
-    internal sealed class HttpClientWrapper : IHttpClientWrapper
+    public sealed class HttpClientWrapper : IHttpClientWrapper
     {
         private readonly HttpClient _client;
 

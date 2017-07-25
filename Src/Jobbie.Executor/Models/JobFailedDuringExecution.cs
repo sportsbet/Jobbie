@@ -6,7 +6,7 @@ namespace Jobbie.Executor.Models
     public sealed class JobFailedDuringExecution : Exception
     {
         public JobFailedDuringExecution(Exception inner, IJobDetail job, ITrigger trigger)
-            : base($"Failed to execute job ({job.Key}|{job.Description}) on schedule ({trigger.Key}|{trigger.Description}).", inner)
+            : base($"[JobId={job.Key}] [ScheduleId={trigger.Key}] [MessageText=Failed to execute job ({job.Description}) on schedule ({trigger.Description}).]", inner)
         {
             
         }

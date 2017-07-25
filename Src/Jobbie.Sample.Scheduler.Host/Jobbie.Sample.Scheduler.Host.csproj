@@ -190,9 +190,6 @@
     <None Include="App.config" />
     <None Include="www\browser\README.adoc" />
     <None Include="www\browser\vendor\js\jquery-1.10.2.min.map" />
-    <None Include="job_scheduling_data_2_0.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

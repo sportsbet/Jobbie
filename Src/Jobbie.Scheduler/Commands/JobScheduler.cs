@@ -7,7 +7,7 @@ using Quartz;
 
 namespace Jobbie.Scheduler.Commands
 {
-    internal sealed class JobScheduler : IJobScheduler
+    public sealed class JobScheduler : IJobScheduler
     {
         private static readonly ILog _log = LogManager.GetLogger<JobScheduler>();
 
@@ -77,7 +77,7 @@ namespace Jobbie.Scheduler.Commands
 
         public void Delete(Guid scheduleId)
         {
-            _log.Info($"Removing schedule (ScheduleId={scheduleId}).");
+            _log.Info($"[ScheduleId={scheduleId}] [MessageText=Deleting schedule.]");
 
             try
             {
@@ -91,7 +91,7 @@ namespace Jobbie.Scheduler.Commands
 
         private TriggerBuilder Construct(Guid scheduleId, Guid jobId, string description, DateTime startUtc)
         {
-            _log.Debug($"Scheduling job (JobId={jobId}|Description={description}|ScheduleId={scheduleId}|StartUtc={startUtc}).");
+            _log.Info($"[JobId={jobId}] [ScheduleId={scheduleId}] [MessageText=Creating schedule (Description={description}|StartUtc={startUtc}).]");
 
             return
                 TriggerBuilder
