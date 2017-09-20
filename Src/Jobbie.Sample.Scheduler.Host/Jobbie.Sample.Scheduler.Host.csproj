@@ -170,7 +170,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="www\browser\README.adoc" />
     <None Include="www\browser\vendor\js\jquery-1.10.2.min.map" />
     <None Include="packages.config" />
