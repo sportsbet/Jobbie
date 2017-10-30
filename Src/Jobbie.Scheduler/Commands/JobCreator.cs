@@ -48,7 +48,7 @@ namespace Jobbie.Scheduler.Commands
                         .UsingJobData("ContentType", contentType)
                         .UsingJobData("CreatedUtc", _now.Utc.Ticks)
                         .UsingJobData("Headers", headers)
-                        .RequestRecovery(true)
+                        .RequestRecovery(false)
                         .Build();
 
                 _scheduler.AddJob(details, true);
