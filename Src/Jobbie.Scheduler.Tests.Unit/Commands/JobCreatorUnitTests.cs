@@ -93,7 +93,7 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
                                     && j.JobDataMap.GetString("ContentType") == _contentType
                                     && j.JobDataMap.GetLong("CreatedUtc") == _now.Utc.Ticks
                                     && j.JobDataMap.GetString("Headers") == _headers
-                                    && j.RequestsRecovery),
+                                    && !j.RequestsRecovery),
                             Arg<bool>.Is.Equal(true)));
         }
     }
