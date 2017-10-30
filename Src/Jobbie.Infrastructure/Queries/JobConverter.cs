@@ -19,8 +19,7 @@ namespace Jobbie.Infrastructure.Queries
 
         private static HttpVerb HttpVerb(string value)
         {
-            HttpVerb verb;
-            Enum.TryParse(value, true, out verb);
+            Enum.TryParse<HttpVerb>(value, true, out var verb);
             return verb;
         }
     }
