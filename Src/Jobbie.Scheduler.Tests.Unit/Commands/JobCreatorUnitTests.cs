@@ -44,6 +44,7 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
             private readonly string _httpVerb;
             private readonly string _payload;
             private readonly string _contentType;
+            private readonly bool _durable;
             private readonly string _headers;
 
             public TestContext()
@@ -56,6 +57,7 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
                 _httpVerb = _fixture.Create<string>();
                 _payload = _fixture.Create<string>();
                 _contentType = _fixture.Create<string>();
+                _durable = _fixture.Create<bool>();
                 _headers = _fixture.Create<string>();
 
                 _scheduler = _fixture.Freeze<IScheduler>();
@@ -74,7 +76,7 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
 
             public TestContext Act()
             {
-                _sut.Create(_jobId, _description, _callbackUrl, _httpVerb, _payload, _contentType, _headers);
+                _sut.Create(_jobId, _description, _callbackUrl, _httpVerb, _payload, _contentType, _durable, _headers);
                 return this;
             }
 
@@ -93,6 +95,7 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
                                     && j.JobDataMap.GetString("ContentType") == _contentType
                                     && j.JobDataMap.GetLong("CreatedUtc") == _now.Utc.Ticks
                                     && j.JobDataMap.GetString("Headers") == _headers
+                                    && j.Durable == _durable
                                     && !j.RequestsRecovery),
                             Arg<bool>.Is.Equal(true)));
         }
