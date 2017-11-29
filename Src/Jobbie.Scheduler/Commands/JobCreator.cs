@@ -30,6 +30,7 @@ namespace Jobbie.Scheduler.Commands
             string httpVerb,
             string payload,
             string contentType,
+            bool durable,
             string headers)
         {
             _log.Info($"[JobId={jobId}] [MessageText=Creating job (Description={description}).]");
@@ -41,7 +42,7 @@ namespace Jobbie.Scheduler.Commands
                         .Create<JobExecutor>()
                         .WithIdentity(jobId.ToString())
                         .WithDescription(description)
-                        .StoreDurably(true)
+                        .StoreDurably(durable)
                         .UsingJobData("CallbackUrl", callbackUrl)
                         .UsingJobData("HttpVerb", httpVerb)
                         .UsingJobData("Payload", payload)

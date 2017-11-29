@@ -16,6 +16,8 @@ namespace Jobbie.Sample.Scheduler.Contracts.Api.Payloads
 
         public string ContentType { get; set; }
 
+        public bool Durable { get; set; }
+
         public string Headers { get; set; }
     }
 }
