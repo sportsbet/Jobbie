@@ -11,7 +11,6 @@ namespace Jobbie.Domain.Commands
             string httpVerb,
             string payload,
             string contentType,
-            bool durable,
             string headers);
     }
 }

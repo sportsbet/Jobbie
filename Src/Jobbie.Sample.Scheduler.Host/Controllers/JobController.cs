@@ -55,7 +55,7 @@ namespace Jobbie.Sample.Scheduler.Host.Controllers
                 return BadRequest(ModelState);
 
             var jobId = Guid.NewGuid();
-            _creator.Create(jobId, body.Description, body.CallbackUrl, body.HttpVerb, body.Payload, body.ContentType, body.Durable, body.Headers);
+            _creator.Create(jobId, body.Description, body.CallbackUrl, body.HttpVerb, body.Payload, body.ContentType, body.Headers);
             return Get(jobId);
         }
 
