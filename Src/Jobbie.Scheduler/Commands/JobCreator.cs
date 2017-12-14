@@ -30,13 +30,24 @@ namespace Jobbie.Scheduler.Commands
             string httpVerb,
             string payload,
             string contentType,
-            string headers)
+            string headers) =>
+            Create(jobId, description, callbackUrl, httpVerb, payload, contentType, headers, null);
+
+        public void Create(
+            Guid jobId,
+            string description,
+            string callbackUrl,
+            string httpVerb,
+            string payload,
+            string contentType,
+            string headers,
+            TimeSpan? timeout)
         {
             _log.Info($"[JobId={jobId}] [MessageText=Creating job (Description={description}).]");
 
             try
             {
-                var details =
+                var builder =
                     JobBuilder
                         .Create<JobExecutor>()
                         .WithIdentity(jobId.ToString())
@@ -48,10 +59,12 @@ namespace Jobbie.Scheduler.Commands
                         .UsingJobData("ContentType", contentType)
                         .UsingJobData("CreatedUtc", _now.Utc.Ticks)
                         .UsingJobData("Headers", headers)
-                        .RequestRecovery(false)
-                        .Build();
+                        .RequestRecovery(false);
 
-                _scheduler.AddJob(details, true);
+                if (timeout.HasValue)
+                    builder.UsingJobData("Timeout", timeout.Value.Ticks);
+
+                _scheduler.AddJob(builder.Build(), true);
             }
             catch (Exception e)
             {

@@ -15,12 +15,18 @@ namespace Jobbie.Infrastructure.Queries
                 job.JobDataMap.GetString("Payload"),
                 job.JobDataMap.GetString("ContentType"),
                 job.JobDataMap.GetString("Headers"),
-                new DateTime(job.JobDataMap.GetLong("CreatedUtc")));
+                new DateTime(job.JobDataMap.GetLong("CreatedUtc")),
+                Timeout(job.JobDataMap));
 
         private static HttpVerb HttpVerb(string value)
         {
             Enum.TryParse<HttpVerb>(value, true, out var verb);
             return verb;
         }
+
+        private static TimeSpan? Timeout(JobDataMap job) =>
+            job.ContainsKey("Timeout")
+                ? TimeSpan.FromTicks(job.GetIntValue("Timeout"))
+                : (TimeSpan?) null;
     }
 }

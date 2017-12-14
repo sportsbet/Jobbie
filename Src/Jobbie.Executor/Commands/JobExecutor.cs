@@ -42,6 +42,8 @@ namespace Jobbie.Executor.Commands
 
                 AddHeaders(job);
 
+                SetTimeout(job);
+
                 switch (job.HttpVerb)
                 {
                     case HttpVerb.Post:
@@ -94,6 +96,12 @@ namespace Jobbie.Executor.Commands
         {
             foreach (var header in job.Headers)
                 _client.AddHeader(header.Key, header.Value);
+        }
+
+        private void SetTimeout(Job job)
+        {
+            if (job.Timeout.HasValue)
+                _client.Timeout = job.Timeout.Value;
         }
     }
 }

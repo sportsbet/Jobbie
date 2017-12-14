@@ -26,6 +26,13 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
                 .Assert();
 
         [Test]
+        public void Creates_job_with_timeout() =>
+            _context
+                .ArrangeWithTimeout()
+                .Act()
+                .Assert();
+
+        [Test]
         public void Fails_to_create_job() =>
             Assert.Throws<FailedToCreateJob>(() =>
                 _context
@@ -45,6 +52,7 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
             private readonly string _payload;
             private readonly string _contentType;
             private readonly string _headers;
+            private TimeSpan? _timeout;
 
             public TestContext()
             {
@@ -72,9 +80,18 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
                 return this;
             }
 
+            public TestContext ArrangeWithTimeout()
+            {
+                _timeout = _fixture.Create<TimeSpan>();
+                return this;
+            }
+
             public TestContext Act()
             {
-                _sut.Create(_jobId, _description, _callbackUrl, _httpVerb, _payload, _contentType, _headers);
+                if (_timeout.HasValue)
+                    _sut.Create(_jobId, _description, _callbackUrl, _httpVerb, _payload, _contentType, _headers, _timeout);
+                else
+                    _sut.Create(_jobId, _description, _callbackUrl, _httpVerb, _payload, _contentType, _headers);
                 return this;
             }
 
@@ -93,6 +110,7 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
                                     && j.JobDataMap.GetString("ContentType") == _contentType
                                     && j.JobDataMap.GetLong("CreatedUtc") == _now.Utc.Ticks
                                     && j.JobDataMap.GetString("Headers") == _headers
+                                    && (!_timeout.HasValue || TimeSpan.FromTicks(j.JobDataMap.GetIntValue("Timeout")) == _timeout)
                                     && j.Durable
                                     && !j.RequestsRecovery),
                             Arg<bool>.Is.Equal(true)));

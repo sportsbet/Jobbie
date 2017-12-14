@@ -55,7 +55,8 @@ namespace Jobbie.Sample.Scheduler.Host.Controllers
                 return BadRequest(ModelState);
 
             var jobId = Guid.NewGuid();
-            _creator.Create(jobId, body.Description, body.CallbackUrl, body.HttpVerb, body.Payload, body.ContentType, body.Headers);
+            var timeout = Convert(body.TimeoutInMilliseconds);
+            _creator.Create(jobId, body.Description, body.CallbackUrl, body.HttpVerb, body.Payload, body.ContentType, body.Headers, timeout);
             return Get(jobId);
         }
 
@@ -77,8 +78,14 @@ namespace Jobbie.Sample.Scheduler.Host.Controllers
                 HttpVerb = j.HttpVerb.ToString(),
                 Payload = j.Payload,
                 ContentType = j.ContentType,
-                CreatedUtc = j.CreatedUtc
+                CreatedUtc = j.CreatedUtc,
+                Timeout = j.Timeout
             };
+
+        private static TimeSpan? Convert(int? timeoutInMilliseconds) =>
+            timeoutInMilliseconds.HasValue
+                ? TimeSpan.FromMilliseconds(timeoutInMilliseconds.Value)
+                : (TimeSpan?) null;
 
         private static IEnumerable<Job> OrderBy(IEnumerable<Job> jobs, IPage page) =>
             page.SortDirection == SortDirection.Ascending

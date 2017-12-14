@@ -26,23 +26,29 @@ namespace Jobbie.Executor.Tests.Unit.Commands
         [SetUp]
         public void SetUp() => _content = new TestContext();
 
-        [Test]
-        public void Executes_job_with_http_post() =>
+        [TestCase(false)]
+        [TestCase(true)]
+        public void Executes_job_with_http_post(bool timeout) =>
             _content
+                .ArrangeTimeout(timeout)
                 .ArrangePostJob()
                 .Act()
                 .Assert();
 
-        [Test]
-        public void Executes_job_with_http_put() =>
+        [TestCase(false)]
+        [TestCase(true)]
+        public void Executes_job_with_http_put(bool timeout) =>
             _content
+                .ArrangeTimeout(timeout)
                 .ArrangePutJob()
                 .Act()
                 .Assert();
 
-        [Test]
-        public void Executes_job_with_http_delete() =>
+        [TestCase(false)]
+        [TestCase(true)]
+        public void Executes_job_with_http_delete(bool timeout) =>
             _content
+                .ArrangeTimeout(timeout)
                 .ArrangeDeleteJob()
                 .Act()
                 .Assert();
@@ -79,6 +85,7 @@ namespace Jobbie.Executor.Tests.Unit.Commands
             private readonly IJobConverter _converter;
             private readonly IJobExecutionContext _context;
             private Job _job;
+            private TimeSpan? _timeout;
 
             public TestContext()
             {
@@ -105,6 +112,9 @@ namespace Jobbie.Executor.Tests.Unit.Commands
                 _client
                     .Expect(c => c.PostAsync(Arg<Uri>.Is.Equal(_job.CallbackUrl), Arg<StringContent>.Is.Anything))
                     .Return(Task.FromResult(_fixture.Create<HttpResponseMessage>()));
+
+                if (_timeout.HasValue)
+                    _client.Expect(c => c.Timeout).SetPropertyWithArgument(_timeout.Value);
 
                 return this;
             }
@@ -137,6 +147,13 @@ namespace Jobbie.Executor.Tests.Unit.Commands
                 return this;
             }
 
+            public TestContext ArrangeTimeout(bool timeout)
+            {
+                if (timeout)
+                    _timeout = _fixture.Create<TimeSpan>();
+                return this;
+            }
+
             public TestContext Act()
             {
                 _sut.Execute(_context);
@@ -159,7 +176,8 @@ namespace Jobbie.Executor.Tests.Unit.Commands
                         _fixture.Create<string>(),
                         "application/json",
                         null,
-                        _fixture.Create<DateTime>());
+                        _fixture.Create<DateTime>(),
+                        _timeout);
 
                 _converter
                     .Expect(c => c.For(Arg<IJobDetail>.Matches(j => Equals(_context.JobDetail.Key, jobKey))))
