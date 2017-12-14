@@ -17,5 +17,7 @@ namespace Jobbie.Sample.Scheduler.Contracts.Api.Payloads
         public string ContentType { get; set; }
 
         public string Headers { get; set; }
+
+        public int? TimeoutInMilliseconds { get; set; }
     }
 }

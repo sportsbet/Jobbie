@@ -19,12 +19,7 @@ namespace Jobbie.Sample.Scheduler.Contracts.Api.Payloads.Validation
             RuleFor(r => r.CallbackUrl)
                 .NotEmpty()
                 .WithMessage("'CallbackUrl' should not be empty.")
-                .Must(
-                    value =>
-                    {
-                        Uri temp;
-                        return string.IsNullOrEmpty(value) || Uri.TryCreate(value, UriKind.Absolute, out temp);
-                    })
+                .Must(value => string.IsNullOrEmpty(value) || Uri.TryCreate(value, UriKind.Absolute, out _))
                 .WithMessage("'CallbackUrl' must contain a valid URI.");
 
             RuleFor(r => r.HttpVerb)
@@ -48,6 +43,11 @@ namespace Jobbie.Sample.Scheduler.Contracts.Api.Payloads.Validation
                     !string.IsNullOrEmpty(j.HttpVerb)
                     && !j.HttpVerb.Equals("delete", StringComparison.OrdinalIgnoreCase))
                 .WithMessage("'ContentType' should not be empty.");
+
+            RuleFor(r => r.TimeoutInMilliseconds)
+                .GreaterThan(0)
+                .When(j => j.TimeoutInMilliseconds.HasValue)
+                .WithMessage("'TimeoutInMilliseconds' should be greater than zero.");
         }
     }
 }

@@ -14,7 +14,8 @@ namespace Jobbie.Domain.Models
             string payload,
             string contentType,
             string headers,
-            DateTime createdUtc)
+            DateTime createdUtc,
+            TimeSpan? timeout)
         {
             JobId = jobId;
             Description = description;
@@ -27,6 +28,21 @@ namespace Jobbie.Domain.Models
                 foreach (var h in headers.Split(';').Select(x => x.Split(':', '=')))
                     Headers.Add(h[0], h[1]);
             CreatedUtc = createdUtc;
+            Timeout = timeout;
+        }
+
+        public Job(
+            Guid jobId,
+            string description,
+            Uri callbackUrl,
+            HttpVerb httpVerb,
+            string payload,
+            string contentType,
+            string headers,
+            DateTime createdUtc)
+            : this(jobId, description, callbackUrl, httpVerb, payload, contentType, headers, createdUtc, null)
+        {
+            
         }
 
         public Guid JobId { get; }
@@ -44,6 +60,8 @@ namespace Jobbie.Domain.Models
         public IDictionary<string, string> Headers { get; }
 
         public DateTime CreatedUtc { get; }
+
+        public TimeSpan? Timeout { get; }
 
         public override string ToString() => $"JobId={JobId}|Description={Description}";
     }

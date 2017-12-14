@@ -22,30 +22,52 @@ namespace Jobbie.Infrastructure.Tests.Unit
         [Test]
         public void Converts_Job() =>
             _context
+                .ArrangeJob()
+                .Act()
+                .Assert();
+
+        [Test]
+        public void Converts_Job_with_timeout() =>
+            _context
+                .ArrangeTimeout()
+                .ArrangeJob()
                 .Act()
                 .Assert();
 
         private sealed class TestContext
         {
+            private readonly IFixture _fixture;
             private readonly IJobConverter _sut;
-            private readonly IJobDetail _job;
-            private readonly Job _expected;
+            private IJobDetail _job;
+            private Job _expected;
             private Job _result;
+            private TimeSpan? _timeout;
 
             public TestContext()
             {
-                var fixture = new Fixture().Customize(new AutoRhinoMockCustomization());
+                _fixture = new Fixture().Customize(new AutoRhinoMockCustomization());
 
-                var jobId = fixture.Create<Guid>();
-                var description = fixture.Create<string>();
-                var callbackUrl = fixture.Create<Uri>();
-                var httpVerb = fixture.Create<HttpVerb>();
-                var payload = fixture.Create<string>();
-                var contentType = fixture.Create<string>();
-                var createdUtc = fixture.Create<DateTime>();
+                _sut = _fixture.Create<JobConverter>();
+            }
+
+            public TestContext ArrangeTimeout()
+            {
+                _timeout = _fixture.Create<TimeSpan>();
+                return this;
+            }
+
+            public TestContext ArrangeJob()
+            {
+                var jobId = _fixture.Create<Guid>();
+                var description = _fixture.Create<string>();
+                var callbackUrl = _fixture.Create<Uri>();
+                var httpVerb = _fixture.Create<HttpVerb>();
+                var payload = _fixture.Create<string>();
+                var contentType = _fixture.Create<string>();
+                var createdUtc = _fixture.Create<DateTime>();
 
                 _job =
-                    new JobDetailImpl(fixture.Create<string>(), typeof(JobExecutor))
+                    new JobDetailImpl(_fixture.Create<string>(), typeof(JobExecutor))
                     {
                         Key = JobKey.Create(jobId.ToString()),
                         Description = description,
@@ -60,9 +82,11 @@ namespace Jobbie.Infrastructure.Tests.Unit
                             }
                     };
 
-                _expected = new Job(jobId, description, callbackUrl, httpVerb, payload, contentType, null, createdUtc);
+                if (_timeout.HasValue)
+                    _job.JobDataMap.Add("Timeout", _timeout.Value.Ticks);
 
-                _sut = fixture.Create<JobConverter>();
+                _expected = new Job(jobId, description, callbackUrl, httpVerb, payload, contentType, null, createdUtc, _timeout);
+                return this;
             }
 
             public TestContext Act()

@@ -17,8 +17,14 @@ namespace Jobbie.Infrastructure.Http
 
         public Uri BaseAddress
         {
-            get { return _client.BaseAddress; }
-            set { _client.BaseAddress = value; }
+            get => _client.BaseAddress;
+            set => _client.BaseAddress = value;
+        }
+
+        public TimeSpan Timeout
+        {
+            get => _client.Timeout;
+            set => _client.Timeout = value;
         }
 
         public void AddHeader(string name, string value) =>

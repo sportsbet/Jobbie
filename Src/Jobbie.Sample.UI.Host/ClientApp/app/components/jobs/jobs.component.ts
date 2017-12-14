@@ -46,7 +46,8 @@ export class JobsComponent {
             "httpVerb": ["POST"],
             "payload": [""],
             "contentType": ["application/json"],
-            "headers": [""]
+            "headers": [""],
+            "timeoutInMilliseconds": [""]
         });
 
         this.scheduleForm = fb.group({
@@ -280,6 +281,8 @@ interface Job {
     payload: string;
     contentType: string;
     headers: string;
+    timeout: string;
+    timeoutInMilliseconds: number;
 }
 
 interface Schedule {

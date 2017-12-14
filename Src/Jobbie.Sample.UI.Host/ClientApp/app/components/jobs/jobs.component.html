@@ -116,6 +116,10 @@
                         <td>Content Type</td>
                         <td>{{selectedJob.contentType}}</td>
                     </tr>
+                    <tr>
+                        <td>Timeout</td>
+                        <td>{{selectedJob.timeout}}</td>
+                    </tr>
                 </tbody>
                 <tfoot>
                     <tr>
@@ -185,6 +189,12 @@
                 <label class="col-sm-2 control-label">Headers</label>
                 <div class="col-md-6">
                     <input type="text" class="form-control" placeholder="e.g. source=Jobbie.Sample.Client.WebApi.Host;authorization=basic abc123" formControlName="headers">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Timeout (in milliseconds)</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="" formControlName="timeoutInMilliseconds">
                 </div>
             </div>
             <div class="form-group">
