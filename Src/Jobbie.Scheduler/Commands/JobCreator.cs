@@ -30,8 +30,9 @@ namespace Jobbie.Scheduler.Commands
             string httpVerb,
             string payload,
             string contentType,
-            string headers) =>
-            Create(jobId, description, callbackUrl, httpVerb, payload, contentType, headers, null);
+            string headers,
+            bool isOnceOff) =>
+            Create(jobId, description, callbackUrl, httpVerb, payload, contentType, headers, isOnceOff, null);
 
         public void Create(
             Guid jobId,
@@ -41,6 +42,7 @@ namespace Jobbie.Scheduler.Commands
             string payload,
             string contentType,
             string headers,
+            bool isOnceOff,
             TimeSpan? timeout)
         {
             _log.Info($"[JobId={jobId}] [MessageText=Creating job (Description={description}).]");
@@ -59,6 +61,7 @@ namespace Jobbie.Scheduler.Commands
                         .UsingJobData("ContentType", contentType)
                         .UsingJobData("CreatedUtc", _now.Utc.Ticks)
                         .UsingJobData("Headers", headers)
+                        .UsingJobData("IsOnceOff", isOnceOff)
                         .RequestRecovery(false);
 
                 if (timeout.HasValue)

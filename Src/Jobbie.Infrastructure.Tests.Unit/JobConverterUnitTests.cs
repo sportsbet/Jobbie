@@ -65,6 +65,7 @@ namespace Jobbie.Infrastructure.Tests.Unit
                 var payload = _fixture.Create<string>();
                 var contentType = _fixture.Create<string>();
                 var createdUtc = _fixture.Create<DateTime>();
+                var isOnceOff = _fixture.Create<bool>();
 
                 _job =
                     new JobDetailImpl(_fixture.Create<string>(), typeof(JobExecutor))
@@ -85,7 +86,7 @@ namespace Jobbie.Infrastructure.Tests.Unit
                 if (_timeout.HasValue)
                     _job.JobDataMap.Add("Timeout", _timeout.Value.Ticks);
 
-                _expected = new Job(jobId, description, callbackUrl, httpVerb, payload, contentType, null, createdUtc, _timeout);
+                _expected = new Job(jobId, description, callbackUrl, httpVerb, payload, contentType, null, createdUtc, isOnceOff, _timeout);
                 return this;
             }
 

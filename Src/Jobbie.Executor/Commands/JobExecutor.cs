@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using Common.Logging;
+using Jobbie.Domain.Commands;
 using Jobbie.Domain.Models;
 using Jobbie.Executor.Models;
 using Jobbie.Infrastructure.Http;
@@ -18,15 +19,18 @@ namespace Jobbie.Executor.Commands
         private readonly IHttpClientWrapper _client;
         private readonly IJobConverter _converter;
         private readonly Stopwatch _timer;
+        private readonly IJobDeleter _cleanup;
 
         public JobExecutor(
             IHttpClientWrapper client,
             IJobConverter converter,
-            Stopwatch timer)
+            Stopwatch timer,
+            IJobDeleter cleanup)
         {
             _client = client;
             _converter = converter;
             _timer = timer;
+            _cleanup = cleanup;
         }
 
         public void Execute(IJobExecutionContext context)
@@ -57,6 +61,12 @@ namespace Jobbie.Executor.Commands
                         break;
                     default:
                         throw new HttpVerbNotSupported(job);
+                }
+
+                if (job.IsOnceOff)
+                {
+                    _log.Info($"[JobId={raw.Key}] [ScheduleId={trigger.Key}] [TimeTaken={_timer.Elapsed}] [MessageText=Deleting once-off job ({raw.Description}) on schedule ({trigger.Description}).]");
+                    _cleanup.Delete(job.JobId);
                 }
             }
             catch (Exception e)

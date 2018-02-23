@@ -11,7 +11,8 @@ namespace Jobbie.Domain.Commands
             string httpVerb,
             string payload,
             string contentType,
-            string headers);
+            string headers,
+            bool isOnceOff);
 
         void Create(
             Guid jobId,
@@ -21,6 +22,7 @@ namespace Jobbie.Domain.Commands
             string payload,
             string contentType,
             string headers,
+            bool isOnceOff,
             TimeSpan? timeout);
     }
 }

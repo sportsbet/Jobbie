@@ -56,7 +56,7 @@ namespace Jobbie.Sample.Scheduler.Host.Controllers
 
             var jobId = Guid.NewGuid();
             var timeout = Convert(body.TimeoutInMilliseconds);
-            _creator.Create(jobId, body.Description, body.CallbackUrl, body.HttpVerb, body.Payload, body.ContentType, body.Headers, timeout);
+            _creator.Create(jobId, body.Description, body.CallbackUrl, body.HttpVerb, body.Payload, body.ContentType, body.Headers, body.IsOnceOff, timeout);
             return Get(jobId);
         }
 
@@ -79,6 +79,7 @@ namespace Jobbie.Sample.Scheduler.Host.Controllers
                 Payload = j.Payload,
                 ContentType = j.ContentType,
                 CreatedUtc = j.CreatedUtc,
+                IsOnceOff = j.IsOnceOff,
                 Timeout = j.Timeout
             };
 

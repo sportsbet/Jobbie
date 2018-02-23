@@ -117,6 +117,10 @@
                         <td>{{selectedJob.contentType}}</td>
                     </tr>
                     <tr>
+                        <td>Once-Off?</td>
+                        <td>{{selectedJob.isOnceOff}}</td>
+                    </tr>
+                    <tr>
                         <td>Timeout</td>
                         <td>{{selectedJob.timeout}}</td>
                     </tr>
@@ -195,6 +199,12 @@
                 <label class="col-sm-2 control-label">Timeout (in milliseconds)</label>
                 <div class="col-md-6">
                     <input type="text" class="form-control" placeholder="" formControlName="timeoutInMilliseconds">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Once-Off?</label>
+                <div class="col-md-1">
+                    <input type="checkbox" class="form-control" placeholder="" formControlName="isOnceOff">
                 </div>
             </div>
             <div class="form-group">

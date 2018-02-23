@@ -16,6 +16,7 @@ namespace Jobbie.Infrastructure.Queries
                 job.JobDataMap.GetString("ContentType"),
                 job.JobDataMap.GetString("Headers"),
                 new DateTime(job.JobDataMap.GetLong("CreatedUtc")),
+                IsOnceOff(job.JobDataMap),
                 Timeout(job.JobDataMap));
 
         private static HttpVerb HttpVerb(string value)
@@ -23,6 +24,9 @@ namespace Jobbie.Infrastructure.Queries
             Enum.TryParse<HttpVerb>(value, true, out var verb);
             return verb;
         }
+
+        private static bool IsOnceOff(JobDataMap job) =>
+            job.ContainsKey("IsOnceOff") && job.GetBooleanValue("IsOnceOff");
 
         private static TimeSpan? Timeout(JobDataMap job) =>
             job.ContainsKey("Timeout")

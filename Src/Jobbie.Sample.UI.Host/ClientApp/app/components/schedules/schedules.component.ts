@@ -218,6 +218,7 @@ interface Job {
     httpVerb: string;
     payload: string;
     contentType: string;
+    isOnceOff: boolean;
     timeout: string;
 }
 

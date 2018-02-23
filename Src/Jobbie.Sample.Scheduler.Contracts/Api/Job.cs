@@ -19,6 +19,8 @@ namespace Jobbie.Sample.Scheduler.Contracts.Api
 
         public DateTime CreatedUtc { get; set; }
 
+        public bool IsOnceOff { get; set; }
+
         public TimeSpan? Timeout { get; set; }
 
         public override string ToString() => $"JobId={JobId}";

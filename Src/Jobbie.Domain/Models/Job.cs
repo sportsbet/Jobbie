@@ -15,6 +15,7 @@ namespace Jobbie.Domain.Models
             string contentType,
             string headers,
             DateTime createdUtc,
+            bool isOnceOff,
             TimeSpan? timeout)
         {
             JobId = jobId;
@@ -28,6 +29,7 @@ namespace Jobbie.Domain.Models
                 foreach (var h in headers.Split(';').Select(x => x.Split(':', '=')))
                     Headers.Add(h[0], h[1]);
             CreatedUtc = createdUtc;
+            IsOnceOff = isOnceOff;
             Timeout = timeout;
         }
 
@@ -39,8 +41,9 @@ namespace Jobbie.Domain.Models
             string payload,
             string contentType,
             string headers,
-            DateTime createdUtc)
-            : this(jobId, description, callbackUrl, httpVerb, payload, contentType, headers, createdUtc, null)
+            DateTime createdUtc,
+            bool isOnceOff)
+            : this(jobId, description, callbackUrl, httpVerb, payload, contentType, headers, createdUtc, isOnceOff, null)
         {
             
         }
@@ -60,6 +63,8 @@ namespace Jobbie.Domain.Models
         public IDictionary<string, string> Headers { get; }
 
         public DateTime CreatedUtc { get; }
+
+        public bool IsOnceOff { get; }
 
         public TimeSpan? Timeout { get; }
 

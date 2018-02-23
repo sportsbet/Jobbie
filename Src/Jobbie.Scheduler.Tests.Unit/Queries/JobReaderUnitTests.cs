@@ -99,7 +99,8 @@ namespace Jobbie.Scheduler.Tests.Unit.Queries
                         _fixture.Create<string>(),
                         _fixture.Create<string>(),
                         null,
-                        _fixture.Create<DateTime>());
+                        _fixture.Create<DateTime>(),
+                        _fixture.Create<bool>());
             }
 
             public TestContext ArrangeJob()

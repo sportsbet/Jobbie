@@ -52,6 +52,7 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
             private readonly string _payload;
             private readonly string _contentType;
             private readonly string _headers;
+            private readonly bool _isOnceOff;
             private TimeSpan? _timeout;
 
             public TestContext()
@@ -65,6 +66,7 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
                 _payload = _fixture.Create<string>();
                 _contentType = _fixture.Create<string>();
                 _headers = _fixture.Create<string>();
+                _isOnceOff = _fixture.Create<bool>();
 
                 _scheduler = _fixture.Freeze<IScheduler>();
                 _now = _fixture.Freeze<INow>();
@@ -89,9 +91,9 @@ namespace Jobbie.Scheduler.Tests.Unit.Commands
             public TestContext Act()
             {
                 if (_timeout.HasValue)
-                    _sut.Create(_jobId, _description, _callbackUrl, _httpVerb, _payload, _contentType, _headers, _timeout);
+                    _sut.Create(_jobId, _description, _callbackUrl, _httpVerb, _payload, _contentType, _headers, _isOnceOff, _timeout);
                 else
-                    _sut.Create(_jobId, _description, _callbackUrl, _httpVerb, _payload, _contentType, _headers);
+                    _sut.Create(_jobId, _description, _callbackUrl, _httpVerb, _payload, _contentType, _headers, _isOnceOff);
                 return this;
             }
 

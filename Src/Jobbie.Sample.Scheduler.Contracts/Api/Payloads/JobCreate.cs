@@ -18,6 +18,8 @@ namespace Jobbie.Sample.Scheduler.Contracts.Api.Payloads
 
         public string Headers { get; set; }
 
+        public bool IsOnceOff { get; set; }
+
         public int? TimeoutInMilliseconds { get; set; }
     }
 }

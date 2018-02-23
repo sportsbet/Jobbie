@@ -47,6 +47,7 @@ export class JobsComponent {
             "payload": [""],
             "contentType": ["application/json"],
             "headers": [""],
+            "isOnceOff": [""],
             "timeoutInMilliseconds": [""]
         });
 
@@ -281,6 +282,7 @@ interface Job {
     payload: string;
     contentType: string;
     headers: string;
+    isOnceOff: boolean;
     timeout: string;
     timeoutInMilliseconds: number;
 }

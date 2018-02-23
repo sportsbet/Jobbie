@@ -177,6 +177,7 @@ namespace Jobbie.Executor.Tests.Unit.Commands
                         "application/json",
                         null,
                         _fixture.Create<DateTime>(),
+                        _fixture.Create<bool>(),
                         _timeout);
 
                 _converter
